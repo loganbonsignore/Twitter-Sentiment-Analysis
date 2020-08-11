@@ -1,7 +1,7 @@
 # Twitter Sentiment Analysis
 
 ### Project Overview
-Great companies aim to provide outstanding customer satisfaction like it's an additional product or service. Understanding the market's opinion about your business or brand name is valuable to business owners but getting that information can be expensive and hard. Luckily for us, 330 million people around the world are already using Twitter to talk about their experiences whether good or bad. Twitter's search API allows us to access these tweets and analyze them to calculate the average consumer's sentiment related to chosen keywords.
+Great companies aim to provide outstanding customer satisfaction like it's an additional product or service. Understanding the market's opinion about your business or brand name is valuable to business owners but getting that information can be expensive and hard. Luckily for us, 330 million people around the world are already using Twitter to talk about their experiences whether good or bad. Twitter's search API allows us to access these tweets and analyze them to calculate the average consumer's sentiment related to any given keywords.
 
 This script returns a 'sentiment score' calculated for any given topic provided by the user. 100 tweets posted within the last seven days are analyzed for positive or negative sentiment determined by the NaiveBayesClassifier. The output is a score between 1-5 and two randomly chosen tweets used during the analysis.
 
