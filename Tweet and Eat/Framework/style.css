@@ -1,0 +1,103 @@
+body {
+    background-color: rgb(205, 213, 221);
+}
+
+h1 {
+    font-size: 30px;
+}
+.title-text {
+    color: rgb(71, 144, 212);
+    padding: 20px 10px 10px 0px;
+}
+
+.figure-title {
+    text-align: center;
+    color: rgb(71, 144, 212);
+    padding: 10px 10px 10px 10px;
+}
+
+#page-title {
+    background: rgb(71, 144, 212);
+    padding: 10px 10px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+#summary-img {
+    float:left;
+    margin: 10px 20px 5px 10px;
+    height: 65%;
+    width: 65%;
+    -webkit-box-shadow: 0px 3px 15px -1px rgba(0,0,0,0.15); 
+    box-shadow: 0px 3px 15px -1px rgba(0,0,0,0.15);
+}
+
+.linked-images {
+    height: 100%;
+    width: 100%;
+    padding: 10px 10px;
+}
+
+.linked-images-comparison {
+    height: 80%;
+    width: 80%;
+    padding: 10px;
+    margin-left: 10%;
+}
+
+#content-container {
+    background-color: rgb(247, 250, 252);
+    margin: 60px 20px 20px 20px;
+}
+
+#content-container-2 {
+    background-color: rgb(247, 250, 252);
+    margin: 60px 20px 20px 20px;
+    max-height: max-content;
+    padding: 10px;
+}
+
+.comp {
+    font-size: 20px;
+    text-align: center;
+}
+
+.data-table {
+    background: rgb(247, 250, 252);
+    margin-top: 5%;
+
+}
+
+.summary-img-viz {
+    height: 90%;
+    width: 90%;
+}
+
+#summary-viz-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px
+}
+
+#border {
+    outline: 3px outset #1C6EA4;
+    outline-offset: 1px;    
+}
+
+#shadow-border {
+    -webkit-box-shadow: 0px 3px 15px -1px rgba(0,0,0,0.30); 
+    box-shadow: 0px 3px 15px -1px rgba(0,0,0,0.30);
+}
+
+
+@media (max-width: 600px) {
+    .navbar-light.bg-light {
+        background-color: rgb(71, 144, 212) !important;
+    }
+
+    .navbar-light.bg-light a{
+        color: white !important;
+        background-color: rgb(71, 144, 212) !important;
+    }

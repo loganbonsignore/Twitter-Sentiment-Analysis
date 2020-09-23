@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet & Eat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/styles.css') }}">
+</head>
+<body>
+    <main style="background-color: #7f5a83; background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <a class="navbar-brand active text-white bg-primary p-2 rounded" href="/">Tweet & Eat</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-primary" href="/use_case" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Use Case
+                    </a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-primary" href="/use_case">Cheesecake Factory</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="/sentiment_analysis" target="_blank">Analysis</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+        <div class="text-center">
+            <div class="m-5">
+                <div class="p-3">
+                    <h1 class="display-3 text-white">Tweet & Eat</h1>
+                </div>
+                <form method="POST" action="/result" role="form">
+                    <div class="form-group">
+                        <input name="searchterm" style="width:50%" type="text" class="row form-control align-items-center mx-auto mb-3" id="formGroupExampleInput" placeholder="Enter the name of a business to analyze...">
+                        <input name="searchzip" style="width:30%" type="text" class="row form-control align-items-center mx-auto mb-3" id="formGroupExampleInput" placeholder="Enter a city name...">
+                        <p class="lead" >
+                            <input class="btn btn-primary btn-lg" type="submit" role="button" value="Get Sentiment Score"/>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-12 text-white p-3 rounded" style="background-color: #7f5a83; background-image: linear-gradient(315deg, #7f5a83 0%, #133c58 74%);-webkit-box-shadow: 0px 0px 15px -2px rgba(0,0,0,0.71); box-shadow: 0px 0px 15px -2px rgba(0,0,0,0.71);">
+                    <div>
+                        <div class="text-center">
+                            <div class="mb-2">
+                                <h3>{{message}}</h3>
+                            </div>
+                            <div>
+                                <p>Enter both a restaurant name and city name to return a optimal result.<br/>
+                                Enter a restaurant name to see all matching businesses in our database.<br/>
+                                Enter a city name to see all businesses in that matching city.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-8 text-white">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3>{{match.name}}</h3>
+                                <hr style="border-color: #f8f8f8;"/>
+                                <div class="float-right text-wrap text-left col-6" style="font-size: large;">
+                                    <p><strong>{{match.price}} • {{match.categories}}</strong></p>
+                                    <hr style="border-color: #f8f8f8;"/>
+                                    <p><strong>{{match.phone}}</strong></p>
+                                    <hr style="border-color: #f8f8f8;"/>
+                                    <p class="text-wrap"><strong>{{match.address}}</strong></p>
+                                    <!-- <h5><strong>Hours</strong><br/><h5> -->
+                                    <hr style="border-color: #f8f8f8;"/>
+                                    <p>
+                                        {% for hour in hours_table %}
+                                            <strong>{{hour.day}}</strong> || {{hour.start}} || {{hour.end}}<br/>
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                                <div class="float-left col-6">
+                                    <img src={{match.img_url}} alt="Picture of restaurant" width="100%" height="100%" />
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Additional Pictures</h3>
+                        <hr style="border-color: #f8f8f8;"/>
+                        <div class="row">
+                            {% for picture in match.picture_urls %}
+                            <div class="col-12">
+                                <div class="m-3">
+                                    <img src={{picture}} alt="Alternative pictures of {{match.name}}" width="100%" height="100%"/>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    <article class="col-4">
+                        <h3 class=" col-auto text-center text-white">Nearby Businesses</h3>
+                        <hr style="border-color: #f8f8f8;"/>
+                        <div>
+                            {% for restaurant in nearby_restaurants %}
+                            <div class="p-3 mb-4">
+                                <div class="card text-center mx-auto border rounded" style="width: 18rem;">
+                                    <img class="card-img-top" src={{restaurant.image_url}} alt="Picture of this restaurant.">
+                                    <div class="card-body bg-light">
+                                    <h5 class="card-title"><strong>{{restaurant.restaurant_name}}</strong></h5>
+                                    <p class="card-text"><strong>Phone:</strong> {{restaurant.restaurant_display_phone}}<br/><strong>Address:</strong> {{restaurant.location.display_address[0]}}, {{restaurant.location.display_address[-1]}}</p>
+                                    <!-- <a href="#" class="btn btn-primary">Analyze</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="section-headers text-center">
+                    <hr style="border-color: #f8f8f8;"/>
+                    <p>Hand crafted by Logan Bonsignore</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>

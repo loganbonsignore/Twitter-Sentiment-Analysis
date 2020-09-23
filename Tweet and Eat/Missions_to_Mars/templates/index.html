@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+    <main>
+        <div>
+            <div class="jumbotron text-center">
+                <h1 class="display-3">Mission to Mars</h1>
+                <p class="lead">
+                <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
+                </p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="latest_news_container">
+                <div class="col-12">
+                    <h3>Latest News</h3>
+                    <strong>{{news_titles}}</strong>
+                    <p>{{news_paragraphs}}</p>
+                </div>
+            </div>
+            
+            <div id="featured_image_container">
+                <div class="row">
+                    <article class="col-7">
+                        <h3>Featured Image</h3>
+                        <img src={{featured_image_url}} alt="Latest Featured Image From Mars" height="100%" width="100%">
+                    </article>
+                    <article class="col-5">
+                        <h3>Mars vs. Earth</h3>
+                        <div class="text-center">
+                            {{ table|safe }}
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="text-center">Mars Hemispheres</h3>
+                    <hr/>
+                    <div class="row d-flex align-items-center justify-content-center">
+                        {% for item in hemisphere_list %}
+                        <div class="col-6">
+                            <div class="card hemispheres">
+                                <div class="card-body">
+                                    <img src={{item.image_url}} alt="Latest Photography from Mars" class="hemisphere-image">
+                                    <h4 class="card-title text-center">{{item.title}}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

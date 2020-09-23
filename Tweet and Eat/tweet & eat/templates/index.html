@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet & Eat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/styles.css') }}">
+</head>
+<body>
+    <main style="background-color: #7f5a83; background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);"">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <a class="navbar-brand active text-white bg-primary p-2 rounded" href="/">Tweet & Eat</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-primary" href="/use_case" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Use Case
+                    </a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-primary" href="/use_case">Cheesecake Factory</a>
+                        <!-- <a class="dropdown-item" href="assets/humidity.html">Humidity</a>
+                        <a class="dropdown-item" href="assets/cloudiness.html">Cloudiness</a>
+                        <a class="dropdown-item" href="assets/windspeed.html">Wind Speed</a> -->
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-primary" href="/sentiment_analysis" target="_blank">Analysis</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+        <div>
+            <div class="jumbotron text-center container mt-0" style="background-image: url('https://www.foodiesfeed.com/wp-content/uploads/2019/02/messy-pizza-on-a-black-table.jpg');">
+                <h1 class="display-3 text-white">Tweet & Eat</h1>
+
+                <form method="POST" action="/result" role="form">
+                    <div class="form-group">
+                        <input name="searchterm" style="width:50%" type="text" class="row form-control align-items-center mx-auto mb-3" id="formGroupExampleInput" placeholder="Enter the name of a business to analyze...">
+                        <input name="searchzip" style="width:30%" type="text" class="row form-control align-items-center mx-auto mb-3" id="formGroupExampleInput" placeholder="Enter a city name...">
+                        <p class="lead" >
+                            <input class="btn btn-primary btn-lg" type="submit" role="button" value="Get Sentiment Score"/>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row pb-4">
+                <div class="col-12 text-white">
+                    <div style="font-size: large;">
+                        <div class="mb-3">
+                            <h3>Our Mission</h3>
+                            <hr style="border-color: #f8f8f8;"/>
+                            <blockquote class="text-center rounded p-2"><strong style="font-size:larger; text-shadow: 3px 5px 2px #474747, 0px 0px 1px rgba(0,0,0,0.19);"><em>Deliver a web app that leverages Twitter's vast data warehouse <br/>to give decision makers an easy way to guage market sentiment towards their product or brand.</em></strong></blockquote>
+                        </div>
+                        <div class="mb-4">
+                            <h3>How It Works</h3>
+                            <hr style="border-color: #f8f8f8;"/>
+                            <p>The user searches for a business name and city name located in Colorado. If a matching business is found in our database, the search term entered by the user is used to retrieve tweets containing that term from Twitter's API. A sentiment score between 1-5 is returned to the user along with one positive and negative tweet used during the analysis.</p>
+                            <p>For optimal results:</p>
+                            <ul>
+                                <li>Narrow search to only keywords.</li>
+                                <li><strong>Example:</strong> Instead of searching for "The Cheesecake Factory" try "Cheesecake Factory".</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Analysis</h3>
+                            <hr style="border-color: #f8f8f8;"/>
+                            <p>Sentiment is determined using Machine Learning and Natural Language Processing. One hundred of the latest tweets containing the keyword search term are retrieved from Twitter's API before our algorithm assigns a classification label (positive or negative) to each one.</p>
+                            <p>A "sentiment score" between 1-5 is determined based on the number of positive vs. negative tweets. The model was built using Python and the Natural Language ToolKit library. You can explore our algorithm's<a target="_blank" href="/sentiment_analysis"> source code</a> and a detailed <a href="/use_case">use case</a> here.</p>
+                            <p>Access to larger Twitter datasets during each API request requires a paid Twitter developer account. This would greatly increase the accuracy of our sentiment score as well as allow us to conduct more in-depth analysis. We have opted to continue without signing up for a premium account until the app is production ready.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h3>Data Sources</h3>
+                            <hr style="border-color: #f8f8f8;"/>
+                            <p>Raw tweet data is collected from Twitter's API at the time of user interaction. Real-time access to twitter's database allows us to calculate consumer sentiment toward any given keyword(s) and supply the latest information. All business data is housed in our database. This information was collected using various web scraping techinques and API's.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="row">
+                    <article class="col-8">
+                        <h3 class="text-white">Database GeoMap</h3>
+                        <hr style="border-color: #f8f8f8;"/>
+                        <img src="{{ url_for('static',filename='images/map_plot.png') }}" alt="Map of our restaurant data" height="600px" width="100%">
+                        <div class="mt-5">
+                            <h3 class="text-white">Data Sample</h3>
+                            <hr style="border-color: #f8f8f8;"/>
+                            {{table|safe}}
+                        </div>
+                    </article>
+                    <article class="col-4">
+                        <h3 class=" col-auto text-center text-white">Featured Businesses</h3>
+                        <hr style="border-color: #f8f8f8;"/>
+                        <div>
+                            {% for restaurant in all_restaurants %}
+                            <div class="p-3 mb-4">
+                                <div class="card text-center mx-auto border rounded" style="width: 18rem;">
+                                    <img class="card-img-top" src={{restaurant.img_url}} alt="Picture of this restaurant.">
+                                    <div class="card-body bg-white">
+                                    <h5 class="card-title"><strong>{{restaurant.name}}</strong></h5>
+                                    <p class="card-text"><strong>Phone:</strong> {{restaurant.phone}}<br/><strong>Address:</strong> {{restaurant.address}}</p>
+                                    <!-- <a href="#" class="btn btn-primary">Analyze</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="section-headers text-center">
+                    <hr style="border-color: #f8f8f8;"/>
+                    <p>Hand crafted by Logan Bonsignore</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
