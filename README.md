@@ -3,7 +3,7 @@
 ### Project Overview
 Great companies strive to provide outstanding customer satisfaction like it's an additional product or service. Understanding the market's opinion about your business or brand name is extremely valuable to decision makers, but getting that information can be expensive and hard. Luckily for us, 330 million people around the world are already using Twitter to talk about their experiences.
 
-Tweet & Eat takes advantage of this fact to deliver an easy way for companies to guage consumer sentiment toward their brand or product based on what people are tweeting about it.
+This full-stack web app takes advantage of this fact to deliver an easy way for companies to guage consumer sentiment toward their brand or product based on what people are tweeting about it.
 
 ### How It Works
 The user searches for a business name and city name located in Colorado. If a matching business is found in our database, the search term entered by the user is used to retrieve tweets containing that term from Twitter's API. A sentiment score between 1-5 is returned to the user along with one positive and negative tweet used during the analysis.
