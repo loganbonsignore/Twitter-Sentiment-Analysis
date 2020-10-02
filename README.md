@@ -35,7 +35,7 @@ Raw tweet data is collected from Twitter's API at the time of user interaction. 
 ### References
 1) Training the NaiveBayesClassifier - https://www.digitalocean.com/community/tutorials/how-to-perform-sentiment-analysis-in-python-3-using-the-natural-language-toolkit-nltk#step-1-%E2%80%94-installing-nltk-and-downloading-the-data
 
-### Image Samples:
+### Tweet & Eat Web App Images:
 ![Homepage](https://github.com/loganbonsignore/twitter-sentiment-analysis/blob/master/Images/homepage.png?raw=true)
 ![Database Overview](https://github.com/loganbonsignore/twitter-sentiment-analysis/blob/master/Images/database.png?raw=true)
 
